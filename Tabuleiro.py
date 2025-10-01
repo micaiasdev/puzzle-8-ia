@@ -1,7 +1,4 @@
 from typing import List, Dict, Tuple, Set
-
-
-
 init_board = [
               1,2,3,
               4,0,6,
@@ -29,9 +26,6 @@ def create_successors(board: List[int] = init_board):
   return list_valid_boards
 
 def exibir_tabuleiros_matriz(list_valid_boards: List[List[int]]) -> None:
-    """
-    Exibe cada tabuleiro da lista em formato de matriz 3x3
-    """
     for i, board in enumerate(list_valid_boards):
         print(f"Tabuleiro {i + 1}:")
         for linha in range(3):
