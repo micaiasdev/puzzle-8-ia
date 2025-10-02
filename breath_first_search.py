@@ -22,14 +22,21 @@ def bfs(node: Node):
   fronteira = deque()
   fronteira.append(node)
   explorados = set()
-  # Expandir fronteira
-  new_states = create_successors(node.state)
-  while fronteira:
-    actual_node = fronteira.popleft()
-    if actual_node is not explorados:
+  while(1):
+    actual_level_nodes = list()
+    actual_level = 0
+    while fronteira:
+      actual_node = fronteira.popleft()
+      if actual_node in explorados:
+        continue
       if actual_node.state == final_state:
-        return
-    explorados.add(actual_node)
+        return actual_node
+      actual_level_nodes.append(actual_node)
+      
+    explorados.add(tuple(actual_level_nodes))
+    for explo_node in explorados[actual_level]:
+      new_states 
+      
       
 if __name__ == "__main__":
   bfs(root)
