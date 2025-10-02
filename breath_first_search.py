@@ -8,27 +8,28 @@ init_board = [
               4,5,6,
               7,0,8
                     ]
-final_board =  [
+final_state =  [
               1,2,3,
               4,5,6,
               7,8,0
                     ]
 
 root = Node(init_board, None, None)
+
 def bfs(node: Node):
+  if node.state == final_state:
+    return
   fronteira = deque()
   fronteira.append(node)
   explorados = set()
-  
+  # Expandir fronteira
+  new_states = create_successors(node.state)
   while fronteira:
     actual_node = fronteira.popleft()
+    if actual_node is not explorados:
+      if actual_node.state == final_state:
+        return
     explorados.add(actual_node)
-    if actual_node.state == final_board:
-      return
-    new_states = create_successors(actual_node.state)
-    for state in new_states:
-      new_node = Node(state, None, node)
-      fronteira.append(new_node)
       
 if __name__ == "__main__":
   bfs(root)
