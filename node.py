@@ -7,10 +7,3 @@ class Node:
       self.cost = parent.cost + 1
     else:
       self.cost = 0
-    
-    
-if __name__ == "__main__":
-  raiz = Node([1,2,3,0,4,5,6,7,8], None, None)
-  filho = Node([1,2,3,4,0,5,6,7,8], "right", raiz)
-   
-  print(filho.parent.cost)

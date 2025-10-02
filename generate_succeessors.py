@@ -1,8 +1,8 @@
 from typing import List, Dict, Tuple, Set
 init_board = [
               1,2,3,
-              4,0,6,
-              7,8,5
+              4,5,6,
+              7,0,8
                     ]
      
 def create_successors(board: List[int] = init_board):
@@ -25,23 +25,21 @@ def create_successors(board: List[int] = init_board):
     list_valid_boards.append(new_board)
   return list_valid_boards
 
-def exibir_tabuleiros_matriz(list_valid_boards: List[List[int]]) -> None:
-    for i, board in enumerate(list_valid_boards):
-        print(f"Tabuleiro {i + 1}:")
-        for linha in range(3):
-            for coluna in range(3):
-                index = linha * 3 + coluna
-                valor = board[index]
-                # Exibe 0 como espaço vazio para melhor visualização
-                if valor == 0:
-                    print("  ", end=" ")
-                else:
-                    print(f"{valor:2}", end=" ")
-            print()  # Nova linha após cada linha da matriz
-        print("-" * 10)  # Separador entre tabuleiros
+def print_board(board: List[int]) -> None:
+    """Imprime um tabuleiro em formato de matriz 3x3"""
+    for linha in range(3):
+        for coluna in range(3):
+            index = linha * 3 + coluna
+            valor = board[index]
+            # Exibe 0 como espaço vazio para melhor visualização
+            if valor == 0:
+                print("  ", end=" ")
+            else:
+                print(f"{valor:2}", end=" ")
+        print()  # Nova linha após cada linha da matriz
 
-# Exemplo de uso
+""" # Exemplo de uso
 if __name__ == "__main__":
     sucessores = create_successors()
     print(f"Foram gerados {len(sucessores)} tabuleiros sucessores:\n")
-    exibir_tabuleiros_matriz(sucessores)
+    exibir_tabuleiros_matriz(sucessores) """
