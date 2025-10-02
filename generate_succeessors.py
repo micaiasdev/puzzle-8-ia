@@ -1,47 +1,33 @@
 from typing import List, Dict, Tuple, Set
+from Node import Node
 init_board = [
               1,2,3,
               4,5,6,
               7,0,8
                     ]
-     
-def create_successors(board: List[int] = init_board):
-  list_valid_boards = list()
-  valid_positions = {0:(1,3), 
-                     1:(0,2,4), 
-                     2:(1,6), 
-                     3:(0,4,6), 
-                     4:(1,3,5,7), 
-                     5:(4,2,8), 
-                     6:(3,7), 
-                     7:(6,4,8), 
-                     8:(5,7)}
-  current_pos = init_board.index(0)
-  for pos in valid_positions[current_pos]:
-    new_board = board.copy()
+root = Node(init_board, None, None)
+
+def create_successors(node: Node):
+  list_valid_nodes = list()
+  valid_positions = {0:((1,"right"),(3, "down")), 
+                     1:((0,"left"),(2,"right"),(4,"down")), 
+                     2:((1,"left"),(5,"down")), 
+                     3:((0,"up"),(4,"right"),(6,"down")), 
+                     4:((1,"up"),(3,"left"),(5,"right"),(7,"down")), 
+                     5:((2,"up"),(4,"left"),(8,"down")), 
+                     6:((3,"up"),(7,"right")), 
+                     7:((4,"up"),(6,"left"),(8,"right")), 
+                     8:((5,"up"),(7,"left"))
+                     }
+  current_pos = node.state.index(0)
+  for pos, action in valid_positions[current_pos]:
+    new_board = node.state.copy()
     aux = new_board[pos]
     new_board[pos] = new_board[current_pos]
     new_board[current_pos] = aux
-    list_valid_boards.append(new_board)
-  return list_valid_boards
+    list_valid_nodes.append(Node(new_board, action, node))
+  return list_valid_nodes
 
-def print_board(list_valid_boards: List[List[int]]) -> None:
-    for i, board in enumerate(list_valid_boards):
-        print(f"Tabuleiro {i + 1}:")
-        for linha in range(3):
-            for coluna in range(3):
-                index = linha * 3 + coluna
-                valor = board[index]
-                # Exibe 0 como espaço vazio para melhor visualização
-                if valor == 0:
-                    print("  ", end=" ")
-                else:
-                    print(f"{valor:2}", end=" ")
-            print()  # Nova linha após cada linha da matriz
-        print("-" * 10)  # Separador entre tabuleiros
-
-""" # Exemplo de uso
 if __name__ == "__main__":
-    sucessores = create_successors()
-    print(f"Foram gerados {len(sucessores)} tabuleiros sucessores:\n")
-    exibir_tabuleiros_matriz(sucessores) """
+    for node in create_successors(root):
+        print(node.state, node.action)
