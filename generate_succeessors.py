@@ -25,18 +25,20 @@ def create_successors(board: List[int] = init_board):
     list_valid_boards.append(new_board)
   return list_valid_boards
 
-def print_board(board: List[int]) -> None:
-    """Imprime um tabuleiro em formato de matriz 3x3"""
-    for linha in range(3):
-        for coluna in range(3):
-            index = linha * 3 + coluna
-            valor = board[index]
-            # Exibe 0 como espaço vazio para melhor visualização
-            if valor == 0:
-                print("  ", end=" ")
-            else:
-                print(f"{valor:2}", end=" ")
-        print()  # Nova linha após cada linha da matriz
+def print_board(list_valid_boards: List[List[int]]) -> None:
+    for i, board in enumerate(list_valid_boards):
+        print(f"Tabuleiro {i + 1}:")
+        for linha in range(3):
+            for coluna in range(3):
+                index = linha * 3 + coluna
+                valor = board[index]
+                # Exibe 0 como espaço vazio para melhor visualização
+                if valor == 0:
+                    print("  ", end=" ")
+                else:
+                    print(f"{valor:2}", end=" ")
+            print()  # Nova linha após cada linha da matriz
+        print("-" * 10)  # Separador entre tabuleiros
 
 """ # Exemplo de uso
 if __name__ == "__main__":

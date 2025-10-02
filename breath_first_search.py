@@ -15,21 +15,23 @@ final_board =  [
                     ]
 
 root = Node(init_board, None, None)
-def bfs(root: Node):
-  fronteira = deque(root)
+def bfs(node: Node):
+  fronteira = deque()
+  fronteira.append(node)
   explorados = set()
   
   while fronteira:
-    node = fronteira.popleft()
-    explorados.add(node)
-    if node.state == final_board:
+    actual_node = fronteira.popleft()
+    explorados.add(actual_node)
+    if actual_node.state == final_board:
       return
-    new_states = create_successors(node)
-    for states in new_states:
-  
-  
-
-bfs(root)
+    new_states = create_successors(actual_node.state)
+    for state in new_states:
+      new_node = Node(state, None, node)
+      fronteira.append(new_node)
+      
+if __name__ == "__main__":
+  bfs(root)
   
 
 
