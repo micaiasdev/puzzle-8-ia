@@ -1,0 +1,1 @@
+Caminho reverso é feito partindo do nó resultado e iterar sobre todos os nós até a raiz

@@ -30,4 +30,4 @@ def create_successors(node: Node):
 
 if __name__ == "__main__":
     for node in create_successors(root):
-        print(node.state, node.action)
+        print(node.state, node.action, node.cost)
