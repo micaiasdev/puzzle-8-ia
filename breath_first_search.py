@@ -3,7 +3,7 @@ from collections import deque
 from generate_succeessors import create_successors
 from Node import Node
 
-init_board =   [0,1,3,4,2,6,7,5,8]
+init_board = [6,4,7,8,5,0,3,2,1]
 final_state =  [
               1,2,3,
               4,5,6,
@@ -19,9 +19,11 @@ def bfs(node: Node):
     return
   fronteira = deque()
   fronteira.append(node)
-  explorados = set()
+  explorados = set(node.state)
   while True:
     actual_level_nodes = list()
+    if not fronteira:
+      return None
     while fronteira:
       actual_node = fronteira.popleft()
       if actual_node.state == final_state:
@@ -39,7 +41,7 @@ def bfs(node: Node):
 
 if __name__ == "__main__":
   node = bfs(root)
-  while (1):
+  while node:
     if not node.parent:
       break
     print(node.state, node.action)
