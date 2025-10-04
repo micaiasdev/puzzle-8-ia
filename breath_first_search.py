@@ -3,7 +3,9 @@ from collections import deque
 from generate_succeessors import create_successors
 from Node import Node
 
-init_board = [6,4,7,8,5,0,3,2,1]
+init_board = [8,7,6,
+              5,4,3,
+              2,1,0]
 final_state =  [
               1,2,3,
               4,5,6,
@@ -13,7 +15,6 @@ final_state =  [
 root = Node(init_board, None, None)
 
 def bfs(node: Node):
-  global visit_nodes
   visit_nodes = 0
   if node.state == final_state:
     return
@@ -27,7 +28,8 @@ def bfs(node: Node):
     while fronteira:
       actual_node = fronteira.popleft()
       if actual_node.state == final_state:
-        return actual_node
+        visit_nodes += 1
+        return (actual_node, visit_nodes)
       visit_nodes += 1
       actual_level_nodes.append(actual_node)
       #expand nodes
@@ -39,13 +41,22 @@ def bfs(node: Node):
            fronteira.append(nodes)
            explorados.add(tuple(nodes.state))
 
-if __name__ == "__main__":
-  node = bfs(root)
+
+def backtracking(node: Node):
+  node_backtracking_list = list()
+  if not node.parent:
+    return node
   while node:
     if not node.parent:
-      break
-    print(node.state, node.action)
+      return node_backtracking_list
+    node_backtracking_list.insert(0, node)
     node = node.parent
+  
+if __name__ == "__main__":
+  node, visit_nodes = bfs(root)
+  list_resolve = backtracking(node)
+  for node in list_resolve:
+    print(node.state, node.action)
   print(f"Nós visitados: {visit_nodes}")
     
 
